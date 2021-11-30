@@ -13,6 +13,8 @@ public class ValueDisplay : MonoBehaviour{
     void ChangeText(){
         if(GameSession.instance!=null){
             if(value=="gameVersion")txt.text=GameSession.instance.GetGameVersion();
+
+            else if(value=="health")txt.text=Player.instance.health.ToString()+" / "+Player.instance.healthMax.ToString();
         }
     }
 }

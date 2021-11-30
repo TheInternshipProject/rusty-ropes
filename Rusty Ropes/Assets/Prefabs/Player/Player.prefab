@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5380615866844297196}
   - component: {fileID: 7386467585896616976}
   - component: {fileID: 5704781866789103110}
+  - component: {fileID: 2543575000551301139}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e89adea9422e4844598b017d1e421331, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,10 +97,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: b2b4771de4271c447bc2a65888f50ac6, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.023485333, y: -0.09649801}
+  m_Offset: {x: -0.031813383, y: 0.031243324}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.65264386, y: 0.9622917}
+  m_Size: {x: 1.5890365, y: 2.2466493}
   m_EdgeRadius: 0
 --- !u!50 &7386467585896616976
 Rigidbody2D:
@@ -145,8 +146,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d1a7113debf5db4ea196611c31b20d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthStart: 20
+  health: 0
   speed: 11
   xRange: {x: -12, y: 12}
   yPosID: 0
   damaged: 0
   healed: 0
+--- !u!114 &2543575000551301139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472915466929033032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderTypes: 0
+  normalStrenght: 5
+  normalSmoothing: 1
+  computingNormal: 0

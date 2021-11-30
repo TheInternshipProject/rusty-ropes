@@ -11,7 +11,6 @@ using UnityEngine.Rendering.PostProcessing;
 public class GameSession : MonoBehaviour{
     public static GameSession instance;
     [Header("Global")]
-    public bool smthOn=true;
     [Header("Current Player Values")]
     public int score = 0;
     [Header("Settings")]
@@ -136,3 +135,4 @@ public class GameSession : MonoBehaviour{
     public void SetCheatmode(){if(!cheatmode){cheatmode=true;return;}else{cheatmode=false;return;}}
 }
 public enum dir{up,down,left,right}
+public enum dmgType{normal,silent,flame,shadow,decay,electr,heal,healSilent}
