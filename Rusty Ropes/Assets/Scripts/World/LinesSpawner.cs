@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LineCreator : MonoBehaviour{
+public class LinesSpawner : MonoBehaviour{
+    public static LinesSpawner instance;
     [SerializeField] public int linesAmnt=4;
     [SerializeField] public float linesSpacing=2.33f;
-    [SerializeField] public GameObject[] linesGOs;
+    public GameObject[] linesGOs;
+    public float[] linesPosYs;
+    void Awake(){if(instance!=null){Destroy(gameObject);}else{instance=this;}}
     void Start(){
         linesGOs=new GameObject[linesAmnt];
         linesGOs[0]=transform.GetChild(0).gameObject;
@@ -16,6 +19,9 @@ public class LineCreator : MonoBehaviour{
         }
     }
     void Update(){
-        
+        if(linesPosYs.Length!=linesGOs.Length){linesPosYs=new float[linesGOs.Length];}
+        for(int i=0;i<linesGOs.Length;i++){
+            if(linesPosYs[i]!=linesGOs[i].transform.position.y)linesPosYs[i]=linesGOs[i].transform.position.y;
+        }
     }
 }
