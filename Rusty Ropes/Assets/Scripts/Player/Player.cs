@@ -53,9 +53,9 @@ public class Player : MonoBehaviour{
         if(other.gameObject.CompareTag("Obstacle")){dmg=1;Destroy(other.gameObject);}
         Damage(dmg,dmgType);
     }
-    void Die(){
-        if(health<=0){Destroy(gameObject);AudioManager.instance.Play("PlayerDeath");}
-    }
+    void Die(){if(health<=0){
+        Destroy(gameObject,0.01f);AudioManager.instance.Play("PlayerDeath");GameOverCanvas.instance.OpenGameOverCanvas();
+    }}
     public void Damage(float dmg, dmgType type){
         if(type!=dmgType.heal&&type!=dmgType.healSilent)if(dmg!=0){health-=dmg;/*HPPopUpHUD(-dmg);*/}
 
