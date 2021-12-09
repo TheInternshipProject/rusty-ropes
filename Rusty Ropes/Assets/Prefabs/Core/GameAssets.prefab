@@ -43,8 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a19d5e47a9b6140a3585e9d56118c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects: []
+  objects:
+  - name: Line
+    gobj: {fileID: 1303759943812917158, guid: f58fa21eee26c4d48869857920e1d638, type: 3}
+  - name: Spider
+    gobj: {fileID: 2111777961853367336, guid: 2fcddf274a595ad438fc4c82babcf3bd, type: 3}
+  - name: Donut
+    gobj: {fileID: 0}
   vfx: []
   sprites: []
   skins: []
-  skinOverlays: []

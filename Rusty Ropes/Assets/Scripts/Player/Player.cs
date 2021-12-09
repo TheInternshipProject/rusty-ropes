@@ -10,7 +10,6 @@ public class Player : MonoBehaviour{
     [SerializeField]public float healthStart=20f;
     [DisableInEditorMode]public float health;
     [SerializeField]public float speed=6f;
-    [SerializeField]Vector2 xRange=new Vector2(-12,12f);
 
     [SerializeField]int yPosID;
 
@@ -45,7 +44,7 @@ public class Player : MonoBehaviour{
 
         float deltaX=0f;
         deltaX=Input.GetAxis("Horizontal")*speed*Time.deltaTime;
-        newXpos=Mathf.Clamp(transform.position.x,xRange.x,xRange.y)+deltaX;
+        newXpos=Mathf.Clamp(transform.position.x,Playfield.xRange.x,Playfield.xRange.y)+deltaX;
         transform.position=new Vector2(newXpos,newYpos);
     }
     void OnTriggerEnter2D(Collider2D other){

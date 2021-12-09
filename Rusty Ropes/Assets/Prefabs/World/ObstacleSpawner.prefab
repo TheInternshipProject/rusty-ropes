@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstalcePrefabs:
   - {fileID: 2111777961853367336, guid: 2fcddf274a595ad438fc4c82babcf3bd, type: 3}
+  - {fileID: 2111777961853367336, guid: 934dd9043650d0a4da78e2bb8d7ecef3, type: 3}
+  - {fileID: 2111777961853367336, guid: e5139396265b535408902f8b6f0a2c5a, type: 3}
   spawnPosXs: {x: -13.5, y: 13.5}
   obstacleSpeedRange: {x: 8, y: 12}
   spawnTimeRange: {x: 0.3, y: 1.2}

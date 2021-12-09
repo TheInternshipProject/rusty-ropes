@@ -17,14 +17,16 @@ public class ObstacleSpawner : MonoBehaviour{
     void Update(){
         if(spawnTimer>0)spawnTimer-=Time.deltaTime;
         else if(spawnTimer<=0&&spawnTimer!=-4){
-            yPosID=Random.Range(0,LinesSpawner.instance.linesPosYs.Length-1);
-            var go=Instantiate(obstalcePrefabs[Random.Range(0,obstalcePrefabs.Length-1)],transform);
+            yPosID=Random.Range(0,LinesSpawner.instance.linesPosYs.Length);
+            var go=Instantiate(obstalcePrefabs[Random.Range(0,obstalcePrefabs.Length)],transform);
             var spawnPosX=spawnPosXs.y;
             if(Random.Range(0,2)==1){spawnPosX=spawnPosXs.x;}
             go.transform.localPosition=new Vector2(spawnPosX,LinesSpawner.instance.linesPosYs[yPosID]);
             var speed=Random.Range(obstacleSpeedRange.x,obstacleSpeedRange.y)*-1;
             if(spawnPosX==spawnPosXs.x){speed=Mathf.Abs(speed);go.GetComponent<SpriteRenderer>().flipX=true;}
+            
             go.GetComponent<Rigidbody2D>().velocity=new Vector2(speed,0);
+            if(go.GetComponent<BounceOnEdge>()!=null){go.GetComponent<Rigidbody2D>().velocity=new Vector2(go.GetComponent<Rigidbody2D>().velocity.x,speed*(int)Random.Range(1,-1));}
 
             spawnTimer=Random.Range(spawnTimeRange.x,spawnTimeRange.y);
         }
