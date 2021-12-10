@@ -49,7 +49,7 @@ public class Player : MonoBehaviour{
     }
     void OnTriggerEnter2D(Collider2D other){
         float dmg=0;dmgType dmgType=dmgType.normal;
-        if(other.gameObject.CompareTag("Obstacle")){dmg=1;Destroy(other.gameObject);}
+        if(other.gameObject.CompareTag("Obstacle")){dmg=other.gameObject.GetComponent<Obstacle>().dmg;Destroy(other.gameObject);}
         Damage(dmg,dmgType);
     }
     void Die(){if(health<=0){

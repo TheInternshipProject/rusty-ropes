@@ -3,26 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Boomerang : MonoBehaviour{
-    [SerializeField] public float accelRate=4f;
-    float startVal;
+    [SerializeField] public float deccelRate=4f;
+    [SerializeField] public float startDeccelTimer=0.8f;
     bool revert;
-    Rigidbody2D rb;
+    Obstacle obs;
     void Start(){
-        rb=GetComponent<Rigidbody2D>();
-        startVal=rb.velocity.x;
+        obs=GetComponent<Obstacle>();
     }
     void Update(){
-        var step=accelRate*Time.deltaTime;
-        int dir=1;if(startVal>0){dir=-1;}
-        //if((Mathf.Abs(rb.velocity.x)<=Mathf.Abs(startVal))&&
-        //((dir==-1&&rb.velocity.x>-0.001f)||(dir==1&&rb.velocity.x<0.001f))){
-        if(!revert){rb.velocity=new Vector2(rb.velocity.x+(step*dir),0);}
-        if(
-        (Mathf.Sign(rb.velocity.x)!=Mathf.Sign(startVal))||
-        (Mathf.Abs(rb.velocity.x)<0.05f)
-        ){revert=true;}
-        if(revert){rb.velocity=new Vector2(rb.velocity.x-(step*dir*-1),0);}
+        if(startDeccelTimer>0)startDeccelTimer-=Time.deltaTime;
+        var step=deccelRate*Time.deltaTime;
+        int dir=1;if(obs.startVel.x>0){dir=-1;}
+        if(startDeccelTimer<=0&&
+        ((obs.startVel.x>0&&obs.velocity.x>=obs.startVel.x*-1)||
+        (obs.startVel.x<0&&obs.velocity.x<=obs.startVel.x*-1))){
+            obs.velocity=new Vector2(obs.velocity.x+(step*dir),0);
+        }
 
-        transform.Rotate(0,0,rb.velocity.x);
+        transform.Rotate(0,0,obs.velocity.x);
     }
 }

@@ -10,11 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1502662034712735130}
   - component: {fileID: 6158066309149574108}
-  - component: {fileID: 3173466218249841360}
+  - component: {fileID: 7203284968243828073}
   - component: {fileID: -8946727012459582193}
   - component: {fileID: 7397479964094570847}
+  - component: {fileID: 1897808717249858654}
+  - component: {fileID: 4914135559864516152}
   m_Layer: 0
-  m_Name: obs_Spider
+  m_Name: obs_Boomerang
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 56cdf856dd31de04ca271ad0af30bb4e, type: 2}
+  - {fileID: 2100000, guid: 978a48d955c38ca458c41ffe9ad8b3d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7c3fa76db8d434a4bb510a52b1b9fb28, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b66f028b2b022014d9b1a3eccef554d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -86,8 +88,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3173466218249841360
-BoxCollider2D:
+--- !u!70 &7203284968243828073
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -99,19 +101,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3333334, y: 1.3333334}
-    newSize: {x: 1.3333334, y: 1.3333334}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.3333334, y: 1.3333334}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.06, y: 0}
+  m_Size: {x: 1.08, y: 1.6}
+  m_Direction: 0
 --- !u!50 &-8946727012459582193
 Rigidbody2D:
   serializedVersion: 4
@@ -149,3 +141,33 @@ MonoBehaviour:
   normalStrenght: 5
   normalSmoothing: 1
   computingNormal: 0
+--- !u!114 &1897808717249858654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111777961853367336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a909671e6cda14486004e4c8555bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Boomerang
+  speedRange: {x: 5, y: 9}
+  speed: 0
+  startVel: {x: 0, y: 0}
+  velocity: {x: 0, y: 0}
+--- !u!114 &4914135559864516152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111777961853367336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032b3c10d376a544da1e1f28ddd02958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accelRate: 4
