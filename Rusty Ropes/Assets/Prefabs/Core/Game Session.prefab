@@ -43,11 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f3ffbcefcb5684f840396a9d2e1041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smthOn: 1
   score: 0
   gameSpeed: 0.4
   defaultGameSpeed: 1
-  speedChanged: 1
+  speedChanged: 0
   cheatmode: 0
   dmgPopups: 1
   analyticsOn: 1

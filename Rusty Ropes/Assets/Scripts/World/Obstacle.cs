@@ -7,6 +7,8 @@ public class Obstacle : MonoBehaviour{
     [SerializeField]public float dmg=1;
     [SerializeField]public Vector2 speedRange=new Vector2(5f,9f);
     public float speed;
+    public int yPosID;
+    public bool stuckOnLine;
     public bool reverseSpeed;
     public Vector2 startVel;
     public Vector2 velocity;
@@ -17,11 +19,12 @@ public class Obstacle : MonoBehaviour{
         yield return new WaitForSeconds(0.05f);
         speed=Random.Range(speedRange.x,speedRange.y)*-1;
         startVel=new Vector2(speed,0);
-        if(GetComponent<BounceOnEdge>()!=null){startVel=new Vector2(startVel.x,speed*(int)(Random.Range(0,2)*2-1));}
+        if(GetComponent<BounceOnEdge>()!=null){stuckOnLine=false;startVel=new Vector2(startVel.x,speed*(int)(Random.Range(0,2)*2-1));}
         if(reverseSpeed){speed=Mathf.Abs(speed);startVel=new Vector2(Mathf.Abs(startVel.x),Mathf.Abs(startVel.y));}
         velocity=startVel;
     }
     void Update(){
+        transform.position=new Vector2(transform.position.x,LinesSpawner.instance.linesPosYs[yPosID]);
         rb.velocity=velocity;
     }
 }

@@ -8,7 +8,6 @@ public class ObstacleSpawner : MonoBehaviour{
     [SerializeField]public Vector2 spawnPosXs=new Vector2(-13.5f,13.5f);
     [SerializeField]public Vector2 spawnTimeRange=new Vector2(0.3f,1.2f);
     public float spawnTimer=-4;
-    public int yPosID;
     void Awake(){if(instance!=null){Destroy(gameObject);}else{instance=this;}}
     void Start(){
         spawnTimer=Random.Range(spawnTimeRange.x,spawnTimeRange.y);
@@ -16,13 +15,15 @@ public class ObstacleSpawner : MonoBehaviour{
     void Update(){
         if(spawnTimer>0)spawnTimer-=Time.deltaTime;
         else if(spawnTimer<=0&&spawnTimer!=-4){
-            yPosID=Random.Range(0,LinesSpawner.instance.linesPosYs.Length);
-            var go=Instantiate(obstalcePrefabs[Random.Range(0,obstalcePrefabs.Length)],transform);
-            var obs=go.GetComponent<Obstacle>();
-            var spawnPosX=spawnPosXs.y;
-            if((int)(Random.Range(0,2)*2-1)==1){spawnPosX=spawnPosXs.x;}
-            go.transform.localPosition=new Vector2(spawnPosX,LinesSpawner.instance.linesPosYs[yPosID]);
-            if(spawnPosX==spawnPosXs.x){obs.reverseSpeed=true;go.GetComponent<SpriteRenderer>().flipX=true;}
+            if(LinesSpawner.instance.linesPosYs.Length>0){
+                var yPosID=Random.Range(0,LinesSpawner.instance.linesPosYs.Length);
+                var go=Instantiate(obstalcePrefabs[Random.Range(0,obstalcePrefabs.Length)],transform);
+                var obs=go.GetComponent<Obstacle>();
+                var spawnPosX=spawnPosXs.y;
+                if((int)(Random.Range(0,2)*2-1)==1){spawnPosX=spawnPosXs.x;}
+                go.transform.localPosition=new Vector2(spawnPosX,LinesSpawner.instance.linesPosYs[yPosID]);
+                if(spawnPosX==spawnPosXs.x){obs.reverseSpeed=true;go.GetComponent<SpriteRenderer>().flipX=true;}
+            }
 
             spawnTimer=Random.Range(spawnTimeRange.x,spawnTimeRange.y);
         }

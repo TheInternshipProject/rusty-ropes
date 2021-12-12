@@ -25,8 +25,10 @@ public class Player : MonoBehaviour{
         rb=GetComponent<Rigidbody2D>();
         health=healthStart;
         yield return new WaitForSeconds(0.02f);
-        yPosID=LinesSpawner.instance.linesPosYs.Length/2;
-        transform.position=new Vector2(0,LinesSpawner.instance.linesPosYs[yPosID]);
+        if(LinesSpawner.instance.linesPosYs.Length>0){
+            yPosID=LinesSpawner.instance.linesPosYs.Length/2;
+            transform.position=new Vector2(0,LinesSpawner.instance.linesPosYs[yPosID]);
+        }
     }
     void Update(){
         MovePlayer();
@@ -34,18 +36,20 @@ public class Player : MonoBehaviour{
         health=Mathf.Clamp(health,0,healthMax);
     }
     void MovePlayer(){
-        var newXpos=transform.position.x;
-        var newYpos=transform.position.y;
+        if(LinesSpawner.instance.linesPosYs.Length>0){
+            var newXpos=transform.position.x;
+            var newYpos=transform.position.y;
 
-        if(Input.GetKeyDown(KeyCode.W)){if(yPosID>0){yPosID--;AudioManager.instance.Play("LineSwitch");}}
-        else if(Input.GetKeyDown(KeyCode.S)){if(yPosID<LinesSpawner.instance.linesPosYs.Length-1){yPosID++;AudioManager.instance.Play("LineSwitch");}}
-        yPosID=Mathf.Clamp(yPosID,0,LinesSpawner.instance.linesPosYs.Length-1);
-        newYpos=LinesSpawner.instance.linesPosYs[yPosID];
+            if(Input.GetKeyDown(KeyCode.W)){if(yPosID<LinesSpawner.instance.linesPosYs.Length-1){yPosID++;AudioManager.instance.Play("LineSwitch");}}
+            else if(Input.GetKeyDown(KeyCode.S)){if(yPosID>0){yPosID--;AudioManager.instance.Play("LineSwitch");}}
+            
+            newYpos=LinesSpawner.instance.linesPosYs[yPosID];
 
-        float deltaX=0f;
-        deltaX=Input.GetAxis("Horizontal")*speed*Time.deltaTime;
-        newXpos=Mathf.Clamp(transform.position.x,Playfield.xRange.x,Playfield.xRange.y)+deltaX;
-        transform.position=new Vector2(newXpos,newYpos);
+            float deltaX=0f;
+            deltaX=Input.GetAxis("Horizontal")*speed*Time.deltaTime;
+            newXpos=Mathf.Clamp(transform.position.x,Playfield.xRange.x,Playfield.xRange.y)+deltaX;
+            transform.position=new Vector2(newXpos,newYpos);
+        }
     }
     void OnTriggerEnter2D(Collider2D other){
         float dmg=0;dmgType dmgType=dmgType.normal;

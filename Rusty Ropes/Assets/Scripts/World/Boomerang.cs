@@ -12,7 +12,7 @@ public class Boomerang : MonoBehaviour{
     }
     void Update(){
         if(startDeccelTimer>0)startDeccelTimer-=Time.deltaTime;
-        var step=deccelRate*Time.deltaTime;
+        float step=deccelRate*Time.deltaTime;
         int dir=1;if(obs.startVel.x>0){dir=-1;}
         if(startDeccelTimer<=0&&
         ((obs.startVel.x>0&&obs.velocity.x>=obs.startVel.x*-1)||
@@ -20,6 +20,7 @@ public class Boomerang : MonoBehaviour{
             obs.velocity=new Vector2(obs.velocity.x+(step*dir),0);
         }
 
-        transform.Rotate(0,0,obs.velocity.x);
+        float rotStep=obs.velocity.x*Time.deltaTime*Mathf.Abs(obs.startVel.x);
+        transform.Rotate(0,0,rotStep);
     }
 }

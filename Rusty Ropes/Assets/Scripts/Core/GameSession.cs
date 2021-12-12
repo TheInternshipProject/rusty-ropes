@@ -33,15 +33,13 @@ public class GameSession : MonoBehaviour{
 
     void Awake(){
         SetUpSingleton();
-        instance=this;
         #if UNITY_EDITOR
         cheatmode=true;
         #else
         cheatmode=false;
         #endif
     }
-    void SetUpSingleton(){int numberOfObj=FindObjectsOfType<GameSession>().Length;if(numberOfObj>1){Destroy(gameObject);}else{DontDestroyOnLoad(gameObject);}}
-    void Start(){}
+    void SetUpSingleton(){if(instance!=null){Destroy(gameObject);}else{instance=this;DontDestroyOnLoad(gameObject);}}
     void Update(){
         if(gameSpeed>=0){Time.timeScale=gameSpeed;}if(gameSpeed<0){gameSpeed=0;}
 

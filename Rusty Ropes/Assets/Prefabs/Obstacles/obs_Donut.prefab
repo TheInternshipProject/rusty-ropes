@@ -154,8 +154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Donut
+  dmg: 1
   speedRange: {x: 5, y: 9}
   speed: 0
+  reverseSpeed: 0
   startVel: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
 --- !u!114 &-1071554088692139145
