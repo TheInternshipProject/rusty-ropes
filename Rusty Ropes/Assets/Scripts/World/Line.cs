@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Line : MonoBehaviour{
     [SerializeField]public int yPosID;
+    [SerializeField]public bool fall;
     void Update(){
-        var newYpos=transform.position.y;
-        newYpos=transform.position.y-(LinesSpawner.instance.linesFallSpeed/10);
-        transform.position=new Vector2(transform.position.x,newYpos);
+        if(fall){
+            var newYpos=transform.position.y;
+            newYpos=transform.position.y-(LinesSpawner.instance.linesFallSpeed/10);
+            //var step=(LinesSpawner.instance.linesFallSpeed/10)*Time.deltaTime;
+            //newYpos=transform.position.y+step;
+            transform.position=new Vector2(transform.position.x,newYpos);
+        }
     }
 }

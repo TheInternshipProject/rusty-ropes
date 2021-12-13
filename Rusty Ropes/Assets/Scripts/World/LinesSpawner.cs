@@ -12,45 +12,44 @@ public class LinesSpawner : MonoBehaviour{
     public int yPosIDMax;
     public float spawnCounter=-4;
     void Awake(){if(instance!=null){Destroy(gameObject);}else{instance=this;}}
-    void Start(){
+    IEnumerator Start(){
         linesGOs.Add(transform.GetChild(0).gameObject);
-        transform.GetChild(0).position=new Vector2(transform.GetChild(0).position.x,Playfield.yRange.x-0.2f);
-        for(int i=0;i<4;i++){
-            var go=Instantiate(linesGOs[0],transform);linesGOs.Add(go);
-            SetLinesPosYs();
-            go.transform.position=new Vector2(go.transform.position.x,(float)Math.Round(linesPosYs[linesPosYs.Length-1]+linesSpacing,2));
-            yPosIDMax++;go.GetComponent<Line>().yPosID=yPosIDMax;
+        transform.GetChild(0).position=new Vector2(transform.GetChild(0).position.x,Playfield.yRange.x+0.2f);
+        transform.GetChild(0).gameObject.GetComponent<Line>().fall=true;
+        ResetLinesPosYs();
+        for(int i=0;i<5;i++){
+            yield return new WaitForSeconds(0.01f);
+            StartCoroutine(CreateLine());
         }
         spawnCounter=linesFallSpeed*5;
     }
     void Update(){
+        SetLinesPosYs();
         if(spawnCounter>0)spawnCounter-=Time.deltaTime;
         if(spawnCounter<=0&&spawnCounter!=-4){
-            if(linesPosYs[0]!=((float)Math.Round(linesGOs[linesGOs.Count-1].transform.position.y+linesSpacing,2))&&
-            (float)Math.Round(linesGOs[linesGOs.Count-1].transform.position.y+linesSpacing,2)<Playfield.yRange.y){
-                var go=Instantiate(linesGOs[0],transform);linesGOs.Add(go);
-                SetLinesPosYs();
-                go.transform.position=new Vector2(go.transform.position.x,(float)Math.Round(linesPosYs[linesPosYs.Length-1]+linesSpacing,2));
-                yPosIDMax++;go.GetComponent<Line>().yPosID=yPosIDMax;
-            }
+            if((float)Math.Round(linesGOs[linesGOs.Count-1].transform.position.y+linesSpacing,2)<Playfield.yRange.y+linesSpacing){
+                StartCoroutine(CreateLine());
             spawnCounter=linesFallSpeed*5;
+            }
         }
+    }
+    IEnumerator CreateLine(){
+        var go=Instantiate(linesGOs[0],transform);linesGOs.Add(go);
+        go.transform.position=new Vector2(go.transform.position.x,(float)Math.Round(linesPosYs[linesPosYs.Length-1]+linesSpacing,2));
+        yield return new WaitForSeconds(0.01f);
+        ResetLinesPosYs();
+        yPosIDMax++;go.GetComponent<Line>().yPosID=yPosIDMax;
+        go.GetComponent<Line>().fall=true;
+    }
+    void ResetLinesPosYs(){
+        if(linesPosYs.Length!=linesGOs.Count){linesPosYs=new float[linesGOs.Count];}
         SetLinesPosYs();
     }
     void SetLinesPosYs(){
-        var _linesPosYsTemp=new float[1];
-        if(_linesPosYsTemp.Length!=linesGOs.Count){_linesPosYsTemp=new float[linesGOs.Count];}
-        for(int i=0;i<linesGOs.Count;i++){
-            if(linesGOs[i]!=null){
-                _linesPosYsTemp[i]=(float)Math.Round(linesGOs[i].transform.position.y,2);
-            }
-        }
-        if(linesPosYs.Length!=_linesPosYsTemp.Length){linesPosYs=new float[_linesPosYsTemp.Length];}
         for(int i=0;i<linesGOs.Count;i++){
             linesGOs[i].name="Line"+i;
-            linesPosYs[i]=(float)Math.Round(_linesPosYsTemp[i],2);
+            if(i<linesPosYs.Length)linesPosYs[i]=(float)Math.Round(linesGOs[i].transform.position.y,2);
         }
-        //Array.Sort(linesPosYs);
     }
 }
 
