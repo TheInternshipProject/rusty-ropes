@@ -5,20 +5,21 @@ using UnityEngine;
 public class Line : MonoBehaviour{
     [SerializeField]public int yPosID;
     [SerializeField]public bool fall;
-    [SerializeField]public bool destroy=true;
+    [SerializeField]public bool destroyOOP=true;
     void Update(){
         if(fall){
             var newYpos=transform.position.y;
-            newYpos=transform.position.y-(LinesSpawner.instance.linesFallSpeed/10);
-            //var step=(LinesSpawner.instance.linesFallSpeed/10)*Time.deltaTime;
-            //newYpos=transform.position.y+step;
+            var step=-(LinesSpawner.instance.linesFallSpeed)*Time.deltaTime;
+            newYpos=transform.position.y+step;
             transform.position=new Vector2(transform.position.x,newYpos);
         }
-        /*if(destroy){
-            if(transform.position.y<Playfield.yRange.x-0.1f){
+        if(destroyOOP){
+            if(transform.position.y<Playfield.yRange.x-1f){
+                if(Player.instance.yPosID>0)Player.instance.yPosID--;
                 if(LinesSpawner.instance!=null)LinesSpawner.instance.linesGOs.Remove(LinesSpawner.instance.linesGOs.Find(x=>x==gameObject));
+                LinesSpawner.instance.ResetLinesPosYs();
                 Destroy(gameObject);
             }
-        }*/
+        }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class LinesSpawner : MonoBehaviour{
     public static LinesSpawner instance;
@@ -9,19 +10,20 @@ public class LinesSpawner : MonoBehaviour{
     [SerializeField] public float linesFallSpeed=0.5f;
     public List<GameObject> linesGOs;
     public float[] linesPosYs;
-    public int yPosIDMax;
-    public float spawnCounter=-4;
+    [DisableInEditorMode]public int yPosIDMax;
+    [DisableInEditorMode]public float spawnCounter=-4;
     void Awake(){if(instance!=null){Destroy(gameObject);}else{instance=this;}}
     IEnumerator Start(){
         linesGOs.Add(transform.GetChild(0).gameObject);
         transform.GetChild(0).position=new Vector2(transform.GetChild(0).position.x,Playfield.yRange.x+0.2f);
         transform.GetChild(0).gameObject.GetComponent<Line>().fall=true;
         ResetLinesPosYs();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<(Playfield.yRange.y/linesSpacing)*2;i++){//Create lines on whole screen
             yield return new WaitForSeconds(0.01f);
             StartCoroutine(CreateLine());
         }
         spawnCounter=0.04f;
+        Player.instance.SetOnMiddleLine();
     }
     void Update(){
         SetLinesPosYs();
@@ -41,11 +43,11 @@ public class LinesSpawner : MonoBehaviour{
         yPosIDMax++;go.GetComponent<Line>().yPosID=yPosIDMax;
         go.GetComponent<Line>().fall=true;
     }
-    void ResetLinesPosYs(){
+    public void ResetLinesPosYs(){
         if(linesPosYs.Length!=linesGOs.Count){linesPosYs=new float[linesGOs.Count];}
         SetLinesPosYs();
     }
-    void SetLinesPosYs(){
+    public void SetLinesPosYs(){
         for(int i=0;i<linesGOs.Count;i++){
             linesGOs[i].name="Line"+i;
             if(i<linesPosYs.Length)linesPosYs[i]=(float)Math.Round(linesGOs[i].transform.position.y,2);
@@ -56,13 +58,11 @@ public class LinesSpawner : MonoBehaviour{
         bool _isPossible=false;
         if(id==0);
         else if(linesPosYs[id-1]>Playfield.yRange.x)_isPossible=true;
-        Debug.Log(_isPossible);
         return _isPossible;
     }public bool NextLineInPlayfield(int id){
         bool _isPossible=false;
         if(id>=linesPosYs.Length);
         else if(linesPosYs[id+1]<Playfield.yRange.y)_isPossible=true;
-        Debug.Log(_isPossible);
         return _isPossible;
     }
     /*public int GetAbsoluteID(int id){

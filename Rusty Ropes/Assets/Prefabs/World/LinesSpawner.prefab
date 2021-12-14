@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linesSpacing: 2.33
-  linesFallSpeed: 0.5
+  linesFallSpeed: 0.75
   linesGOs: []
   linesPosYs: []
   yPosIDMax: 0
+  spawnCounter: -4
 --- !u!1001 &8459443479233481468
 PrefabInstance:
   m_ObjectHideFlags: 0

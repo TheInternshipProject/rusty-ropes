@@ -11,7 +11,7 @@ public class Player : MonoBehaviour{
     [DisableInEditorMode]public float health;
     [SerializeField]public float speed=6f;
 
-    [SerializeField]int yPosID;
+    [DisableInEditorMode]public int yPosID;
 
     [HideInInspector]public bool damaged=false;
     [HideInInspector]public bool healed=false;
@@ -21,10 +21,11 @@ public class Player : MonoBehaviour{
     [HideInInspector]public bool electricified=false;
     Rigidbody2D rb;
     void Awake(){instance=this;}
-    IEnumerator Start(){
+    void Start(){
         rb=GetComponent<Rigidbody2D>();
         health=healthStart;
-        yield return new WaitForSeconds(0.02f);
+    }
+    public void SetOnMiddleLine(){
         if(LinesSpawner.instance.linesPosYs.Length>0){
             yPosID=LinesSpawner.instance.linesPosYs.Length/2;
             transform.position=new Vector2(0,LinesSpawner.instance.linesPosYs[yPosID]);
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour{
             else if(Input.GetKeyDown(KeyCode.S)){if(yPosID>0&&LinesSpawner.instance.PrevLineInPlayfield(yPosID)){
                 yPosID--;AudioManager.instance.Play("LineSwitch");}}
             
-            newYpos=LinesSpawner.instance.linesPosYs[yPosID];
+            if(yPosID<LinesSpawner.instance.linesPosYs.Length-1)newYpos=LinesSpawner.instance.linesPosYs[yPosID];
 
             float deltaX=0f;
             deltaX=Input.GetAxis("Horizontal")*speed*Time.deltaTime;

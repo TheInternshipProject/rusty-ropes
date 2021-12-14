@@ -1047,9 +1047,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: LinesSpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 8684163177608017815, guid: 0ea7c824812a9db48925b93a77da74b7, type: 3}
-      propertyPath: linesFallSpeed
-      value: 0.05
+    - target: {fileID: 7454048666520579416, guid: 0ea7c824812a9db48925b93a77da74b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ea7c824812a9db48925b93a77da74b7, type: 3}
