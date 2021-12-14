@@ -46,7 +46,7 @@ public class Player : MonoBehaviour{
             else if(Input.GetKeyDown(KeyCode.S)){if(yPosID>0&&LinesSpawner.instance.PrevLineInPlayfield(yPosID)){
                 yPosID--;AudioManager.instance.Play("LineSwitch");}}
             
-            if(yPosID<LinesSpawner.instance.linesPosYs.Length-1)newYpos=LinesSpawner.instance.linesPosYs[yPosID];
+            if(yPosID<LinesSpawner.instance.linesPosYs.Length-1&&yPosID>=0)newYpos=LinesSpawner.instance.linesPosYs[yPosID];
 
             float deltaX=0f;
             deltaX=Input.GetAxis("Horizontal")*speed*Time.deltaTime;

@@ -40,8 +40,9 @@ public class LinesSpawner : MonoBehaviour{
         go.transform.position=new Vector2(go.transform.position.x,(float)Math.Round(linesPosYs[linesPosYs.Length-1]+linesSpacing,2));
         yield return new WaitForSeconds(0.01f);
         ResetLinesPosYs();
-        yPosIDMax++;go.GetComponent<Line>().yPosID=yPosIDMax;
-        go.GetComponent<Line>().fall=true;
+        var l=go.GetComponent<Line>();
+        yPosIDMax++;l.yPosIDAbsolute=yPosIDMax;
+        l.fall=true;
     }
     public void ResetLinesPosYs(){
         if(linesPosYs.Length!=linesGOs.Count){linesPosYs=new float[linesGOs.Count];}
@@ -49,7 +50,9 @@ public class LinesSpawner : MonoBehaviour{
     }
     public void SetLinesPosYs(){
         for(int i=0;i<linesGOs.Count;i++){
-            linesGOs[i].name="Line"+i;
+            var l=linesGOs[i].GetComponent<Line>();
+            linesGOs[i].name="Line"+i+" ("+l.yPosIDAbsolute+")";
+            l.yPosID=i;
             if(i<linesPosYs.Length)linesPosYs[i]=(float)Math.Round(linesGOs[i].transform.position.y,2);
         }
     }
@@ -64,10 +67,12 @@ public class LinesSpawner : MonoBehaviour{
         if(id>=linesPosYs.Length);
         else if(linesPosYs[id+1]<Playfield.yRange.y)_isPossible=true;
         return _isPossible;
+    }public int RandomLineInPlayfield(){
+        int id=UnityEngine.Random.Range(0,LinesSpawner.instance.linesPosYs.Length);
+        while(linesPosYs[id]>Playfield.yRange.y&&linesPosYs[id]<Playfield.yRange.x){
+            id=UnityEngine.Random.Range(0,LinesSpawner.instance.linesPosYs.Length);
+        }
+        return id;
     }
-    /*public int GetAbsoluteID(int id){
-        var _id=id;
-        return _id;
-    }*/
 }
 

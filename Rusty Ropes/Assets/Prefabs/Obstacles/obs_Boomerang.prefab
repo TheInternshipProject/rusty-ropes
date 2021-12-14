@@ -154,8 +154,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Boomerang
+  dmg: 1
   speedRange: {x: 5, y: 9}
   speed: 0
+  yPosID: 0
+  stuckOnLine: 1
+  reverseSpeed: 0
   startVel: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
 --- !u!114 &4914135559864516152
@@ -170,4 +174,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032b3c10d376a544da1e1f28ddd02958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelRate: 4
+  deccelRate: 4
+  startDeccelTimer: 0.8

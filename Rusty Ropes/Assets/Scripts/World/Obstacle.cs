@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class Obstacle : MonoBehaviour{
     public string name="Spider";
     [SerializeField]public float dmg=1;
     [SerializeField]public Vector2 speedRange=new Vector2(5f,9f);
     public float speed;
-    public int yPosID;
-    public bool stuckOnLine;
-    public bool reverseSpeed;
-    public Vector2 startVel;
-    public Vector2 velocity;
+    [DisableInEditorMode]public int yPosID;
+    public bool stuckOnLine=true;
+    [DisableInEditorMode]public bool reverseSpeed;
+    [DisableInEditorMode]public Vector2 startVel;
+    [DisableInEditorMode]public Vector2 velocity;
     Rigidbody2D rb;
     IEnumerator Start(){
         rb=GetComponent<Rigidbody2D>();
@@ -24,7 +25,7 @@ public class Obstacle : MonoBehaviour{
         velocity=startVel;
     }
     void Update(){
-        transform.position=new Vector2(transform.position.x,LinesSpawner.instance.linesPosYs[yPosID]);
+        if(stuckOnLine)if(yPosID<LinesSpawner.instance.linesPosYs.Length-1&&yPosID>=0)transform.position=new Vector2(transform.position.x,LinesSpawner.instance.linesPosYs[yPosID]);
         rb.velocity=velocity;
     }
 }

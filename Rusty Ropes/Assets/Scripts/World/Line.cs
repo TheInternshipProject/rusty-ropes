@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Line : MonoBehaviour{
     [SerializeField]public int yPosID;
+    [SerializeField]public int yPosIDAbsolute;
     [SerializeField]public bool fall;
     [SerializeField]public bool destroyOOP=true;
     void Update(){
@@ -16,6 +17,10 @@ public class Line : MonoBehaviour{
         if(destroyOOP){
             if(transform.position.y<Playfield.yRange.x-1f){
                 if(Player.instance.yPosID>0)Player.instance.yPosID--;
+                foreach(Obstacle obs in FindObjectsOfType<Obstacle>()){
+                    if(obs.yPosID==0&&obs.stuckOnLine)Destroy(obs.gameObject);
+                    if(obs.yPosID>0)obs.yPosID--;
+                }
                 if(LinesSpawner.instance!=null)LinesSpawner.instance.linesGOs.Remove(LinesSpawner.instance.linesGOs.Find(x=>x==gameObject));
                 LinesSpawner.instance.ResetLinesPosYs();
                 Destroy(gameObject);

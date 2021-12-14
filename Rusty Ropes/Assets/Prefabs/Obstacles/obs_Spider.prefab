@@ -163,7 +163,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Spider
+  dmg: 1
   speedRange: {x: 5, y: 9}
   speed: 0
+  yPosID: 0
+  stuckOnLine: 1
+  reverseSpeed: 0
   startVel: {x: 0, y: 0}
   velocity: {x: 0, y: 0}

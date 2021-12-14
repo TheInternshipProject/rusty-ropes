@@ -16,12 +16,13 @@ public class ObstacleSpawner : MonoBehaviour{
         if(spawnTimer>0)spawnTimer-=Time.deltaTime;
         else if(spawnTimer<=0&&spawnTimer!=-4){
             if(LinesSpawner.instance.linesPosYs.Length>0){
-                var yPosID=Random.Range(0,LinesSpawner.instance.linesPosYs.Length);
+                var yPosID=LinesSpawner.instance.RandomLineInPlayfield();
                 var go=Instantiate(obstalcePrefabs[Random.Range(0,obstalcePrefabs.Length)],transform);
                 var obs=go.GetComponent<Obstacle>();
                 var spawnPosX=spawnPosXs.y;
                 if((int)(Random.Range(0,2)*2-1)==1){spawnPosX=spawnPosXs.x;}
-                go.transform.localPosition=new Vector2(spawnPosX,LinesSpawner.instance.linesPosYs[yPosID]);
+                obs.yPosID=yPosID;
+                go.transform.position=new Vector2(spawnPosX,LinesSpawner.instance.linesPosYs[yPosID]);
                 if(spawnPosX==spawnPosXs.x){obs.reverseSpeed=true;go.GetComponent<SpriteRenderer>().flipX=true;}
             }
 
