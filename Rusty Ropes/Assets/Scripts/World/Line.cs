@@ -5,6 +5,7 @@ using UnityEngine;
 public class Line : MonoBehaviour{
     [SerializeField]public int yPosID;
     [SerializeField]public bool fall;
+    [SerializeField]public bool destroy=true;
     void Update(){
         if(fall){
             var newYpos=transform.position.y;
@@ -13,5 +14,11 @@ public class Line : MonoBehaviour{
             //newYpos=transform.position.y+step;
             transform.position=new Vector2(transform.position.x,newYpos);
         }
+        /*if(destroy){
+            if(transform.position.y<Playfield.yRange.x-0.1f){
+                if(LinesSpawner.instance!=null)LinesSpawner.instance.linesGOs.Remove(LinesSpawner.instance.linesGOs.Find(x=>x==gameObject));
+                Destroy(gameObject);
+            }
+        }*/
     }
 }

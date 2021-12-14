@@ -21,7 +21,7 @@ public class LinesSpawner : MonoBehaviour{
             yield return new WaitForSeconds(0.01f);
             StartCoroutine(CreateLine());
         }
-        spawnCounter=linesFallSpeed*5;
+        spawnCounter=0.04f;
     }
     void Update(){
         SetLinesPosYs();
@@ -29,7 +29,7 @@ public class LinesSpawner : MonoBehaviour{
         if(spawnCounter<=0&&spawnCounter!=-4){
             if((float)Math.Round(linesGOs[linesGOs.Count-1].transform.position.y+linesSpacing,2)<Playfield.yRange.y+linesSpacing){
                 StartCoroutine(CreateLine());
-            spawnCounter=linesFallSpeed*5;
+            spawnCounter=0.04f;
             }
         }
     }
@@ -51,5 +51,23 @@ public class LinesSpawner : MonoBehaviour{
             if(i<linesPosYs.Length)linesPosYs[i]=(float)Math.Round(linesGOs[i].transform.position.y,2);
         }
     }
+
+    public bool PrevLineInPlayfield(int id){
+        bool _isPossible=false;
+        if(id==0);
+        else if(linesPosYs[id-1]>Playfield.yRange.x)_isPossible=true;
+        Debug.Log(_isPossible);
+        return _isPossible;
+    }public bool NextLineInPlayfield(int id){
+        bool _isPossible=false;
+        if(id>=linesPosYs.Length);
+        else if(linesPosYs[id+1]<Playfield.yRange.y)_isPossible=true;
+        Debug.Log(_isPossible);
+        return _isPossible;
+    }
+    /*public int GetAbsoluteID(int id){
+        var _id=id;
+        return _id;
+    }*/
 }
 

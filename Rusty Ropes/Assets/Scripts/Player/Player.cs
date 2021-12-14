@@ -40,9 +40,9 @@ public class Player : MonoBehaviour{
             var newXpos=transform.position.x;
             var newYpos=transform.position.y;
 
-            if(Input.GetKeyDown(KeyCode.W)){if(yPosID<LinesSpawner.instance.linesPosYs.Length-1){//&&LinesSpawner.instance.linesPosYs.Length-1<Playfield.yRange.y){
+            if(Input.GetKeyDown(KeyCode.W)){if(yPosID<LinesSpawner.instance.linesPosYs.Length-1&&LinesSpawner.instance.NextLineInPlayfield(yPosID)){
                 yPosID++;AudioManager.instance.Play("LineSwitch");}}
-            else if(Input.GetKeyDown(KeyCode.S)){if(yPosID>0){//&&LinesSpawner.instance.linesPosYs.Length-1>Playfield.yRange.x){
+            else if(Input.GetKeyDown(KeyCode.S)){if(yPosID>0&&LinesSpawner.instance.PrevLineInPlayfield(yPosID)){
                 yPosID--;AudioManager.instance.Play("LineSwitch");}}
             
             newYpos=LinesSpawner.instance.linesPosYs[yPosID];
