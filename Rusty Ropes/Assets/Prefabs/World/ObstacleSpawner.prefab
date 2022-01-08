@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1635243138663322305}
   - component: {fileID: 3828661914884767662}
+  - component: {fileID: 3824276900219887424}
   m_Layer: 0
   m_Name: ObstacleSpawner
   m_TagString: Untagged
@@ -43,12 +44,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac611235851e9ec42a39ae6d792f36a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstalcePrefabs:
-  - {fileID: 2111777961853367336, guid: 2fcddf274a595ad438fc4c82babcf3bd, type: 3}
-  - {fileID: 2111777961853367336, guid: 934dd9043650d0a4da78e2bb8d7ecef3, type: 3}
-  - {fileID: 2111777961853367336, guid: e5139396265b535408902f8b6f0a2c5a, type: 3}
   spawnPosXs: {x: -13.5, y: 13.5}
-  obstacleSpeedRange: {x: 8, y: 12}
-  spawnTimeRange: {x: 0.3, y: 1.2}
+  spawnTimeRange: {x: 0.3, y: 0.6}
   spawnTimer: -4
-  yPosID: 0
+--- !u!114 &3824276900219887424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635243138663322307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 323cefacdb54e494aa1e663e13bd8c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemList:
+  - name: Spider
+    lootItem: Spider
+    dropChance: 1
+  - name: Donut
+    lootItem: Donut
+    dropChance: 1
+  - name: 
+    lootItem: Boomerang
+    dropChance: 1
+  dropList:
+  - 1
+  - 1
+  - 1
+  itemsPercentage:
+  - name: Spider - Infinity% - 1/-1
+  - name: Donut - Infinity% - 1/-1
+  - name: 
+  sum: 3

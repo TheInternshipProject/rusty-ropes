@@ -583,14 +583,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3414450604952059053, guid: 572716bc2694c0145a69071f57c1ae0b, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 3414450604952059053, guid: 572716bc2694c0145a69071f57c1ae0b, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 6335248459815125324, guid: 572716bc2694c0145a69071f57c1ae0b, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -746,8 +738,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObstacleSpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 1635243138663322307, guid: ae861c9b6caf3dd47b2084122b2e3901, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 3824276900219887424, guid: ae861c9b6caf3dd47b2084122b2e3901, type: 3}
+      propertyPath: itemList.Array.data[1].dropChance
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
